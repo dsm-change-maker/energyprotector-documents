@@ -6,6 +6,7 @@
 
 -   [공통](#공통)
 -   [Device API](#device-api)
+-   [Device Control API](#device-control-api)
 -   [RaspberryPi API](#raspberrypi-api)
 -   [Usage-Time API](#usage-time-api)
 
@@ -31,7 +32,8 @@
         -   device_id(String) : 디바이스의 식별 아이디
         -   device_type(String) : 디바이스의 유형
         -   motor_count(Integer) : ON/OFF 가능한 서보모터의 개수
-        -   connected_raspberry(String) : 연결된 라즈베리파이의 식별 아이디. 연결되지 않았으면 빈 문자열
+        -   connected_raspberry_group(String) : 연결된 라즈베리파이의 그룹 아이디, 연결되지 않았으면 빈 문자열
+        -   connected_raspberry_id(String) : 연결된 라즈베리파이의 식별 아이디. 연결되지 않았으면 빈 문자열
 -   `POST /api/device` - 디바이스 등록 API
     -   description : 새로운 디바이스에 대한 정보를 등록합니다.
     -   method : POST
@@ -75,24 +77,48 @@
     -   response body:
         -   is_success(Boolean) : 삭제 성공 여부.
 
+## Device Control API
+
+-   `POST /api/device/control` - 디바이스 제어 API
+    -   description : 디바이스의 상태(ON/OFF)를 변화시킵니다.
+    -   method : POST
+    -   URI: /api/device/control
+    -   request header:
+        -   `Content-Type`:`application/json`
+    -   param: X
+    -   request body:
+        -   device_id(String): 제어할 디바이스의 식별 아이디
+        -   state(Boolean): true일경우 ON, false일경우 OFF
+        -   raspberry_group(String):디바이스에 연결된 라즈베리파이 그룹 아이디
+        -   raspberry_id(String): 디바이스에 연결된 라즈베리파이 아이디
+        -   raspberry_pw(String):디바이스에 연결된 라즈베리파이 비밀번호
+    -   response header:
+        -   `Content-Type`:`application/json`
+    -   response body:
+        -   is_success(Boolean) : 성공 여부
+
 ## RaspberryPi API
 
--   `GET /api/raspberry` - 라즈베리파이 등록 정보 조회 API
+-   `POST /api/raspberry/connect` - 라즈베리파이 등록 정보 조회 API
     -   description : 라즈베리파이 등록 정보를 가져옵니다.
-    -   method : GET
-    -   URI : /api/raspberry
-    -   request header : X
-    -   param :
+    -   method : POST
+    -   URI : /api/raspberry/connect
+    -   request header :
+        -   `Content-Type`:`application/json`
+    -   param : X
+    -   request body:
+        -   raspberry_group(String) : 조회할 그룹
         -   raspberry_id(String) : 조회할 라즈베리파이 식별 아이디
-    -   request body: X
+        -   raspberry_pw(String) : 조회할 라즈베리파이 비밀번호
     -   response header :
         -   `Content-Type` : `application/json`
     -   response body:
         -   is_success(Boolean) : 조회 성공 여부
-        -   raspberry_id(String) : 조회한 라즈베리파이 식별 아이디
+        -   raspberry_group(String) : 조회할 그룹
+        -   raspberry_id(String) : 라즈베리파이 식별 아이디
         -   raspberry_devices(Array) :
             -   device_id : 조회한 라즈베리파이에 연결된 디바이스 식별 아이디
-            -   device_type : 조회한 라즈베리파이에 연결된 디바이스 유형
+            -   device_type(String) : 조회한 라즈베리파이에 연결된 디바이스 유형
 -   `POST /api/raspberry` - 라즈베리파이 등록 API
     -   description : 새로운 라즈베리파이 정보를 등록합니다.
     -   method: POST - URI : /api/raspberry
@@ -100,6 +126,7 @@
         -   `Content-Type` : `application/json`
     -   param: X
     -   request body
+        -   raspberry_group(String) : 라즈베리파이가 속한 그룹 아이디(ex DSM_blabla)
         -   raspberry_id(String) : 라즈베리파이 식별 아이디(디바이스 연결 시 사용)
         -   raspberry_pw(String) : 라즈베리파이 비밀번호(디바이스 연결 시 사용)
         -   raspberry_devices(Array) :
@@ -116,6 +143,7 @@
         -   `Content-Type` : `application/json`
     -   param: X
     -   request body
+        -   raspberry_group(String) : 라즈베리파이가 속한 그룹 아이디
         -   raspberry_id(String) : 라즈베리파이 식별 아이디(디바이스 연결 시 사용)
         -   raspberry_pw(String) : 수정할 라즈베리파이 비밀번호(디바이스 연결 시 사용)
         -   raspberry_devices(Array) :
@@ -131,6 +159,7 @@
     -   URI : /api/raspberry
     -   request header : X
     -   param:
+        -   raspberry_group(String) : 삭제할 라즈베리파이가 속한 그룹 아이디
         -   raspberry_id(String) : 삭제할 라즈베리파이의 식별 아이디
     -   request body: X
     -   response header:
@@ -146,7 +175,9 @@
     -   URI: /api/usage-time
     -   request header: X
     -   param:
-        -   raspberry_id(String) : 라즈베리파이 식별 아이디
+        -   raspberry_group(String) : 라즈베리파이가 속한 그룹 아이디
+        -   raspberry_id(String) : 라즈베리파이 식별 아이디, 빈 문자열일 경우 그룹 내 전체 라즈베리파이를 대상으로 조회
+        -   sort(Boolean) : usage_time을 기준으로 true시 오름차순 정렬. false시 내림차순 정렬.
         -   year(Boolean) : 최근 year_n년동안의 전력 사용시간 조회. False 시 조회하지 않음
         -   year_n(Integer) : 최근 몇 년을 조회할 것인지 결정. year가 False일 경우 의미 없음. 유효하지 않은 값일 경우 기본 값 1.
         -   month(Boolean) : 최근 month_n달동안의 전력 사용시간 조회. False 시 조회하지 않음.
@@ -162,6 +193,30 @@
         -   is_success(Boolean): 조회 성공 여부
         -   usage_times:
             -   year(Array): 최근 year_n년 동안의 전력 사용시간. year가 false일경우 빈 배열.
+                -   raspberry_id(String) : 라즈베리파이 아이디
+                -   usage_time(Integer) : 사용 시간
             -   month(Array): 최근 month_n달 동안의 전력 사용시간. month가 false일경우 빈 배열.
+                -   raspberry_id(String) : 라즈베리파이 아이디
+                -   usage_time(Integer) : 사용 시간
             -   week(Array): 최근 week_n주 동안의 전력 사용시간.week가 false일경우 빈 배열.
+                -   raspberry_id(String) : 라즈베리파이 아이디
+                -   usage_time(Integer) : 사용 시간
             -   day(Array): 최근 day_n일 동안의 전력 사용시간.day가 false일경우 빈 배열.
+                -   raspberry_id(String) : 라즈베리파이 아이디
+                -   usage_time(Integer) : 사용 시간
+-   `POST /api/usage-time` - 사용시간 저장 API
+    -   description : 특정 라즈베리파이의 하루 전력 사용시간을 저장합니다.
+    -   method: POST
+    -   URI: /api/usage-time
+    -   request header:
+        -   `Content-Type`:`application/json`
+    -   param: X
+    -   request body:
+        -   raspberry_group(String) : 라즈베리파이가 속한 그룹 아이디
+        -   raspberry_id(String) : 라즈베리파이 식별 아이디
+        -   usage_time(Integer) : 사용 시간
+        -   date(String) : 측정 날짜
+    -   response header:
+        -   `Content-Type`:`application/json`
+    -   response body:
+        -   is_success(Boolean):성공 여부
