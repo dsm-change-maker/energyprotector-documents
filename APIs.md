@@ -34,6 +34,7 @@
         -   motor_count(Integer) : ON/OFF 가능한 서보모터의 개수
         -   connected_raspberry_group(String) : 연결된 라즈베리파이의 그룹 아이디, 연결되지 않았으면 빈 문자열
         -   connected_raspberry_id(String) : 연결된 라즈베리파이의 식별 아이디. 연결되지 않았으면 빈 문자열
+        -   on_off (Boolean) : 디바이스의 온오프 유무 확인
 -   `POST /api/device` - 디바이스 등록 API
     -   description : 새로운 디바이스에 대한 정보를 등록합니다.
     -   method : POST
@@ -56,7 +57,6 @@
         -   `Content-Type` : `application/json`
     -   param: X
     -   request body:
-        -   device_id(String) : 수정할 디바이스의 식별 아이디
         -   device_type(String) : 디바이스의 유형을 이 값으로 수정
         -   motor_count(int) : ON/OFF 가능한 서보모터의 개수를 이 값으로 수정
     -   response header:
