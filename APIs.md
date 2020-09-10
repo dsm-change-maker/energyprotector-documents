@@ -42,7 +42,6 @@
         -   `Content-Type` : `application/json`
     -   param : X
     -   request body:
-        -   device_id(String) : 디바이스 식별 아이디
         -   device_type(String) : 디바이스의 유형(스위치 or 플러그 or ETC …)
         -   motor_count(int) : ON/OFF 가능한 서보모터의 개수
     -   response header:
