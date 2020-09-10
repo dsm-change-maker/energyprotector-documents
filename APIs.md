@@ -23,7 +23,7 @@
     -   URI : /api/device
     -   request header :X
     -   param:
-        -   device_id(String) : 가져올 디바이스의 식별 아이디
+        -   key(Integer) : 가져올 디바이스의 key
     -   request body: X
     -   response header:
         -   `Content-Type` : `application/json`
