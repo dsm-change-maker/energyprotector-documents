@@ -31,6 +31,7 @@
         -   is_success(Boolean) : 조회 성공 여부
         -   device_id(String) : 디바이스의 식별 아이디
         -   device_type(String) : 디바이스의 유형
+        -   device_ip(String) : 디바이스 IP Address
         -   motor_count(Integer) : ON/OFF 가능한 서보모터의 개수
         -   connected_raspberry_group(String) : 연결된 라즈베리파이의 그룹 아이디, 연결되지 않았으면 빈 문자열
         -   connected_raspberry_id(String) : 연결된 라즈베리파이의 식별 아이디. 연결되지 않았으면 빈 문자열
@@ -45,6 +46,7 @@
     -   request body:
         -   device_id(String) : 디바이스 식별 아이디
         -   device_type(String) : 디바이스의 유형(스위치 or 플러그 or ETC …)
+        -   device_ip(String) : 디바이스 IP Address
         -   motor_count(int) : ON/OFF 가능한 서보모터의 개수
     -   response header:
         -   `Content-Type` : `application/json`
@@ -60,6 +62,7 @@
     -   request body:
         -   device_id(String) : 수정할 디바이스의 식별 아이디
         -   device_type(String) : 디바이스의 유형을 이 값으로 수정
+        -   device_ip(String) : 디바이스 IP Address
         -   motor_count(int) : ON/OFF 가능한 서보모터의 개수를 이 값으로 수정
     -   response header:
         -   `Content-Type` : `application/json`
