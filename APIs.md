@@ -14,92 +14,187 @@
 
 -   모든 API request, response의 `Content-Type`은 `application/json`이다.
 -   모든 API의 response body에는 성공 여부(or 정상 동작 여부) - is_success(Boolean)을 포함한다.
+-   모든 Device API는 jwt access token 필요하다.
 
 ## Device API
 
--   `GET /api/device` - 디바이스 등록 정보 조회 API
-    -   description : 등록된 디바이스에 대한 정보를 가져옵니다.
-    -   method : GET
-    -   URI : /api/device
-    -   request header :X
-    -   param:
-        -   key(Integer) : 가져올 디바이스의 key
-    -   request body: X
-    -   response header:
-        -   `Content-Type` : `application/json`
-    -   response body:
-        -   is_success(Boolean) : 조회 성공 여부
-        -   device_id(String) : 디바이스의 식별 아이디
-        -   device_type(String) : 디바이스의 유형
-        -   device_ip(String) : 디바이스 IP Address
-        -   motor_count(Integer) : ON/OFF 가능한 서보모터의 개수
-        -   connected_raspberry_group(String) : 연결된 라즈베리파이의 그룹 아이디, 연결되지 않았으면 빈 문자열
-        -   connected_raspberry_id(String) : 연결된 라즈베리파이의 식별 아이디. 연결되지 않았으면 빈 문자열
-        -   on_off(Boolean) : 디바이스의 온오프 상황
--   `POST /api/device` - 디바이스 등록 API
-    -   description : 새로운 디바이스에 대한 정보를 등록합니다.
-    -   method : POST
-    -   URI : /api/device
-    -   request header :
-        -   `Content-Type` : `application/json`
-    -   param : X
-    -   request body:
-        -   device_id(String) : 디바이스 식별 아이디
-        -   device_type(String) : 디바이스의 유형(스위치 or 플러그 or ETC …)
-        -   device_ip(String) : 디바이스 IP Address
-        -   motor_count(int) : ON/OFF 가능한 서보모터의 개수
-    -   response header:
-        -   `Content-Type` : `application/json`
-    -   response body:
-        -   is_success(Boolean) : 등록 성공 여부
--   `PUT /api/device` - 디바이스 등록 정보 수정 API
-    -   description : 등록된 디바이스 정보를 수정합니다.
-    -   method : PUT
-    -   URI : /api/device
-    -   request header :
-        -   `Content-Type` : `application/json`
-    -   param: X
-    -   request body:
-        -   device_id(String) : 수정할 디바이스의 식별 아이디
-        -   device_type(String) : 디바이스의 유형을 이 값으로 수정
-        -   device_ip(String) : 디바이스 IP Address
-        -   motor_count(int) : ON/OFF 가능한 서보모터의 개수를 이 값으로 수정
-    -   response header:
-        -   `Content-Type` : `application/json`
-    -   response body:
-        -   is_success(Boolean) : 등록 수정 성공 여부
--   `DELETE /api/device` - 디바이스 등록 정보 삭제 API
-    -   description : 등록된 디바이스 정보를 삭제합니다.
-    -   method : DELETE
-    -   URI : /api/device
-    -   request header : X
-    -   param:
-        -   device_id(String) : 삭제할 디바이스의 식별 아이디
-    -   request body: X
-    -   response header:
-        -   `Content-Type` : `application/json`
-    -   response body:
-        -   is_success(Boolean) : 삭제 성공 여부.
+- `GET /api/device/<device_id>` - 디바이스 등록 정보 조회 API
+
+  - description : 등록된 디바이스에 대한 정보를 가져옵니다.
+
+  - method : GET
+
+  - URI : /api/device
+
+  - request header :X
+
+  - param :  device_id(String) : 삭제할 디바이스의 식별 아이디
+
+  - request body: X
+
+  -   response header:
+      
+      -   `Content-Type` : `application/json`
+      
+  -   success response:
+      -   is_success(Boolean) : 조회 성공 여부
+      -   device_id(String) : 디바이스의 식별 아이디
+      -   device_type(String) : 디바이스의 유형
+      -   device_ip(String) : 디바이스 IP Address
+      -   motor_count(Integer) : ON/OFF 가능한 서보모터의 개수
+      -   connected_raspberry_group(String) : 연결된 라즈베리파이의 그룹 아이디, 연결되지 않았으면 빈 문자열
+      -   connected_raspberry_id(String) : 연결된 라즈베리파이의 식별 아이디. 연결되지 않았으면 빈 문자열
+      -   on_off(Boolean) : 디바이스의 온오프 상황
+      
+  -   error response:
+
+      -   is_success(Boolean) : 조회 성공 여부
+      -   code : 404 (Fage Not Found)
+
+      or
+
+      -   code : 401 (Unauthorized)
+- `POST /api/device` - 디바이스 등록 API
+
+  - description : 새로운 디바이스에 대한 정보를 등록합니다.
+
+  - method : POST
+
+  - URI : /api/device
+
+  -   request header :
+      
+      -   `Content-Type` : `application/json`
+      
+  - param : X
+
+  -   request body:
+      -   device_id(String) : 디바이스 식별 아이디
+      -   device_type(String) : 디바이스의 유형(스위치 or 플러그 or ETC …)
+      -   device_ip(String) : 디바이스 IP Address
+      -   motor_count(int) : ON/OFF 가능한 서보모터의 개수
+      
+  -   success response:
+      
+      -   `Content-Type` : `application/json`
+      
+  -   response body:
+      
+      -   is_success(Boolean) : 등록 성공 여부
+      
+  -   error response:
+
+      -   code : 401 (Unauthorized)
+
+      
+- `PUT /api/device/<device_id>` - 디바이스 등록 정보 수정 API
+
+  - description : 등록된 디바이스 정보를 수정합니다.
+
+  - method : PUT
+
+  - URI : /api/device
+
+  -   request header :
+      
+      -   `Content-Type` : `application/json`
+      
+  - param: device_id(String) : 삭제할 디바이스의 식별 아이디.
+
+  - request body:
+    -   device_id(String) : 수정할 디바이스의 식별 아이디
+    -   device_type(String) : 디바이스의 유형을 이 값으로 수정
+    -   device_ip(String) : 디바이스 IP Address
+    -   motor_count(int) : ON/OFF 가능한 서보모터의 개수를 이 값으로 수정
+
+  -   response header:
+      
+      -   `Content-Type` : `application/json`
+      
+  - success response:
+
+    -   is_success(Boolean) : 등록 수정 성공 여부
+
+  -    error response
+
+      -   code : 401 (Unauthorized)
+
+      or
+
+      -   is_success(Boolean) : 조회 성공 여부
+      -   code : 404 (Fage Not Found)
+
+      
+
+      
+- `DELETE /api/device/<device_id>` - 디바이스 등록 정보 삭제 API
+
+  - description : 등록된 디바이스 정보를 삭제합니다.
+
+  - method : DELETE
+
+  - URI : /api/device
+
+  - request header : X
+
+  -   param:
+      
+      -   device_id(String) : 삭제할 디바이스의 식별 아이디
+      
+  - request body: X
+
+  -   response header:
+      
+      -   `Content-Type` : `application/json`
+      
+  -   success response:
+      
+      -   is_success(Boolean) : 삭제 성공 여부.
+      
+  -   error response:
+
+      -   code : 401 (Unauthorized)
+
+      or
+
+      -   is_success(Boolean) : 조회 성공 여부
+      -   code : 404 (Fage Not Found)
 
 ## Device Control API
 
--   `POST /api/device/control` - 디바이스 제어 API
-    -   description : 디바이스의 상태(ON/OFF)를 변화시킵니다.
-    -   method : POST
-    -   URI: /api/device/control
-    -   request header:
-        -   `Content-Type`:`application/json`
-    -   param: X
-    -   request body:
-        -   device_id(String): 제어할 디바이스의 식별 아이디
-        -   state(Boolean): true일경우 ON, false일경우 OFF
-        -   raspberry_group(String):디바이스에 연결된 라즈베리파이 그룹 아이디
-        -   raspberry_id(String): 디바이스에 연결된 라즈베리파이 아이디
-        -   raspberry_pw(String):디바이스에 연결된 라즈베리파이 비밀번호
-    -   response header:
-        -   `Content-Type`:`application/json`
-    -   response body:
-        -   is_success(Boolean) : 성공 여부
+- `POST /api/device/control/<device_id>` - 디바이스 제어 API
+
+  - description : 디바이스의 상태(ON/OFF)를 변화시킵니다.
+
+  - method : POST
+
+  - URI: /api/device/control
+
+  -   request header:
+      
+      -   `Content-Type`:`application/json`
+      
+  - param: device_id(String): 제어할 디바이스의 식별 아이디
+
+  - request body:
+    -   state(Boolean): true일경우 ON, false일경우 OFF
+
+  -   response header:
+      
+      -   `Content-Type`:`application/json`
+      
+  -   success response:
+      
+      -   is_success(Boolean) : 성공 여부
+      
+  -   error response:
+
+      -   code : 401 (Unauthorized)
+
+      or
+
+      -   is_success(Boolean) : 조회 성공 여부
+      -   code : 404 (Fage Not Found)
 
 ## RaspberryPi API
 
@@ -110,19 +205,23 @@
     -   request header :
         -   `Content-Type`:`application/json`
     -   param : X
-    -   request body:
+    -   request body:s
         -   raspberry_group(String) : 조회할 그룹
         -   raspberry_id(String) : 조회할 라즈베리파이 식별 아이디
         -   raspberry_pw(String) : 조회할 라즈베리파이 비밀번호
     -   response header :
         -   `Content-Type` : `application/json`
-    -   response body:
-        -   is_success(Boolean) : 조회 성공 여부
+    -   success response :
+        -   is_success(Boolean) : True  조회 성공 여부
         -   raspberry_group(String) : 조회할 그룹
         -   raspberry_id(String) : 라즈베리파이 식별 아이디
         -   raspberry_devices(Array) :
             -   device_id : 조회한 라즈베리파이에 연결된 디바이스 식별 아이디
             -   device_type(String) : 조회한 라즈베리파이에 연결된 디바이스 유형
+    -   error response :
+        -   is_success(Boolean) : False
+        -   msg : "아이디 혹은 패스워드가 일치하지 않습니다."
+        -   code : 400 (Bad Request)
 -   `POST /api/raspberry` - 라즈베리파이 등록 API
     -   description : 새로운 라즈베리파이 정보를 등록합니다.
     -   method: POST - URI : /api/raspberry
