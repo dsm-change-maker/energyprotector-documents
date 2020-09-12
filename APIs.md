@@ -384,7 +384,7 @@
         -   raspberry_group(String) : 라즈베리파이가 속한 그룹 아이디
         -   raspberry_id(String) : 라즈베리파이 식별 아이디
         -   raspberry_pw(String) : 라즈베리파이의 비밀번호
-        -   usage_time(Integer) : 사용 시간
+        -   usage_time(Double) : 사용 시간(단위: 시간. 소수점 아래 : 분)
         -   date(String) : 측정 날짜
     -   response header:
         -   `Content-Type`:`application/json`
