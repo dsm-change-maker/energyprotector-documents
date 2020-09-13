@@ -230,11 +230,11 @@
     -   description : 등록된 라즈베리파이 정보를 삭제합니다.
     -   method : DELETE
     -   URI : /api/raspberry
-    -   request header : X
-    -   param:
-        -   raspberry_group(String) : 삭제할 라즈베리파이가 속한 그룹 아이디
-        -   raspberry_id(String) : 삭제할 라즈베리파이의 식별 아이디
-    -   request body: X
+    -   request header :
+        -   `Content-Type` : `application/json`
+    -   param: X
+    -   request body:
+        -   token: JWT
     -   response header: X
     -   response body: X
     -   error response body:
@@ -251,13 +251,13 @@
         -   raspberry_id(String) : 라즈베리파이 식별 아이디, 빈 문자열일 경우 그룹 내 전체 라즈베리파이를 대상으로 조회
         -   sort(Boolean) : usage_time을 기준으로 true시 오름차순 정렬. false시 내림차순 정렬.
         -   year(Boolean) : 최근 year_n년동안의 전력 사용시간 조회. False 시 조회하지 않음
-        -   year_n(Integer) : 최근 몇 년을 조회할 것인지 결정. year가 False일 경우 의미 없음. 유효하지 않은 값일 경우 기본 값 1.
+        -   year_n(Integer) : 최근 몇 년을 조회할 것인지 결정. year가 False일 경우 의미 없음.
         -   month(Boolean) : 최근 month_n달동안의 전력 사용시간 조회. False 시 조회하지 않음.
-        -   month_n(Integer) : 최근 몇 달을 조회할 것인지 결정. month가 False일 경우 의미없음. 유효하지 않은 값일 경우 기본 값 1.
+        -   month_n(Integer) : 최근 몇 달을 조회할 것인지 결정. month가 False일 경우 의미없음.
         -   week(Boolean) : 최근 week_n주동안의 전력 사용시간 조회. False 시 조회하지 않음
-        -   week_n(Integer) : 최근 몇 주를 조회할 것인지 결정. week가 False일 경우 의미없음. 유효하지 않은 값일 경우 기본 값 1.
+        -   week_n(Integer) : 최근 몇 주를 조회할 것인지 결정. week가 False일 경우 의미없음.
         -   day(Boolean) : 최근 day_n일 동안의 전력 사용시간 조회. False 시 조회하지 않음.
-        -   day_n(Integer) : 최근 며칠을 조회할 것인지 결정. day가 False일 경우 의미없음. 유효하지 않은 값일 경우 기본 값 1.
+        -   day_n(Integer) : 최근 며칠을 조회할 것인지 결정. day가 False일 경우 의미없음.
     -   request body: X
     -   response header:
         -   `Content-Type` : `application/json`
