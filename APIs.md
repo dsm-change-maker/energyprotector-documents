@@ -35,7 +35,7 @@
 
 ## Device API
 
--   `POST /api/device/connect` - 디바이스 등록 정보 조회 API
+-   `GET /api/device/connect` - 디바이스 등록 정보 조회 API
     -   description : 등록된 디바이스에 대한 정보를 가져옵니다.
     -   method : GET
     -   URI : /api/device
