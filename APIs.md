@@ -39,17 +39,14 @@
     -   description : 등록된 디바이스에 대한 정보를 가져옵니다.
     -   method : GET
     -   URI : /api/device
-    -   request header :X
-    -   param:
+    -   request header :
+        -   `Content-Type` : `application/json`
+    -   param: X
+    -   request body:
         -   device_id(String) : 디바이스의 식별 아이디
-        -   raspberry_group(String) : 제어하고자 하는 디바이스가 현재 연결된 라즈베리파이의 그룹 아이디. 어느 곳에도 연결되지 않은 디바이스 조회시 빈 문자열.
-        -   raspberry_id(String) : 제어하고자 하는 디바이스가 현재 연결된 라즈베리파이의 식별 아이디. 어느 곳에도 연결되지 않은 디바이스 조회시 빈 문자열.
-        -   raspberry_pw(String) : 제어하고자 하는 디바이스가 현재 연결된 라즈베리파이의 비밀번호. 어느 곳에도 연결되지 않은 디바이스 조회시 빈 문자열.
-    -   request body: X
     -   response header:
         -   `Content-Type` : `application/json`
     -   response body:
-        -   device_id(String) : 디바이스의 식별 아이디
         -   device_type(String) : 디바이스의 유형
         -   device_ip(String) : 디바이스 IP Address
         -   unit_count(Integer) : ON/OFF 가능한 장치의 개수
@@ -114,10 +111,11 @@
     -   description : 등록된 디바이스 정보를 삭제합니다.
     -   method : DELETE
     -   URI : /api/device
-    -   request header : X
-    -   param:
+    -   request header :
+        -   `Content-Type` : `application/json`
+    -   param: X
+    -   request body:
         -   device_id(String) : 삭제할 디바이스의 식별 아이디
-    -   request body: X
     -   response header: X
     -   response body: X
     -   error response body:
@@ -142,9 +140,6 @@
     -   request body:
         -   device_id(String): 제어할 디바이스의 식별 아이디
         -   on_off(Boolean): true일경우 ON, false일경우 OFF
-        -   raspberry_group(String):디바이스에 연결된 라즈베리파이 그룹 아이디
-        -   raspberry_id(String): 디바이스에 연결된 라즈베리파이 아이디
-        -   raspberry_pw(String):디바이스에 연결된 라즈베리파이 비밀번호
     -   response header: X
     -   response body: X
     -   error response body:
@@ -159,8 +154,8 @@
 
 ## RaspberryPi API
 
--   `POST /api/raspberry/connect` - 라즈베리파이 등록 정보 조회 API
-    -   description : 라즈베리파이 등록 정보를 가져옵니다.
+-   `POST /api/raspberry/connect` - 라즈베리파이 연결 API
+    -   description : 라즈베리파이와 연결합니다.
     -   method : POST
     -   URI : /api/raspberry/connect
     -   request header :
@@ -173,6 +168,23 @@
     -   response header :
         -   `Content-Type` : `application/json`
     -   response body:
+        -   token : ''
+    -   error response body:
+        -   400
+            -   code : 400 (Bad Request)
+            -   message : "아이디 혹은 패스워드가 일치하지 않습니다."
+            -   data:{}
+-   `GET /api/raspberry` - 라즈베리파이 등록 정보 조회 API
+-   description : 라즈베리파이 등록 정보를 가져옵니다.
+    -   method : POST
+    -   URI : /api/raspberry
+    -   request header : X
+    -   param :
+        -   token : Jwt 토큰
+    -   request body: X
+    -   response header :
+        -   `Content-Type` : `application/json`
+    -   response body:
         -   raspberry_group(String) : 조회할 그룹
         -   raspberry_id(String) : 라즈베리파이 식별 아이디
         -   remote_control(Boolean) : 원격 제어 허용/비허용. 비허용 시 웹/앱 등에서 라즈베리파이에 연결 불가능. 만약 False 시 raspberry_devices는 빈 배열.
@@ -180,10 +192,6 @@
             -   device_id : 조회한 라즈베리파이에 연결된 디바이스 식별 아이디
             -   device_type(String) : 조회한 라즈베리파이에 연결된 디바이스 유형
     -   error response body:
-        -   400
-            -   code : 400 (Bad Request)
-            -   message : "아이디 혹은 패스워드가 일치하지 않습니다."
-            -   data:{}
 -   `POST /api/raspberry` - 라즈베리파이 등록 API
     -   description : 새로운 라즈베리파이 정보를 등록합니다.
     -   method: POST - URI : /api/raspberry
@@ -267,20 +275,4 @@
             -   day(Array): 최근 day_n일 동안의 전력 사용시간.day가 false일경우 빈 배열.
                 -   raspberry_id(String) : 라즈베리파이 아이디
                 -   usage_time(Double) : 사용 시간(단위: 시간. 소수점 아래 : 분)
-    -   error response body:
--   `POST /api/usage-time` - 사용시간 저장 API
-    -   description : 특정 라즈베리파이의 하루 전력 사용시간을 저장합니다.
-    -   method: POST
-    -   URI: /api/usage-time
-    -   request header:
-        -   `Content-Type`:`application/json`
-    -   param: X
-    -   request body:
-        -   raspberry_group(String) : 라즈베리파이가 속한 그룹 아이디
-        -   raspberry_id(String) : 라즈베리파이 식별 아이디
-        -   raspberry_pw(String) : 라즈베리파이의 비밀번호
-        -   usage_time(Double) : 사용 시간(단위: 시간. 소수점 아래 : 분)
-        -   date(String) : 측정 날짜
-    -   response header:
-    -   response body: X
     -   error response body:
