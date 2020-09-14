@@ -17,7 +17,6 @@
 
 ## API Response 구조
 
--   code(Integer) : 응답 코드
 -   message(String) : 에러메시지
 -   data : 해당 API의 response body
 
@@ -25,108 +24,138 @@
 
 ```json
 {
-    "code": 200,
     "message": "",
     "data": {
-        "isSuccess": true
     }
 }
 ```
 
 ## Device API
 
--   `GET /api/device/connect` - 디바이스 등록 정보 조회 API
-    -   description : 등록된 디바이스에 대한 정보를 가져옵니다.
-    -   method : GET
-    -   URI : /api/device
-    -   request header :
-        -   `Content-Type` : `application/json`
-    -   param: X
-    -   request body:
-        -   device_id(String) : 디바이스의 식별 아이디
-    -   response header:
-        -   `Content-Type` : `application/json`
-    -   response body:
-        -   device_type(String) : 디바이스의 유형
-        -   device_ip(String) : 디바이스 IP Address
-        -   unit_count(Integer) : ON/OFF 가능한 장치의 개수
-        -   on_off(Array) :
-            -   (Boolean) : 디바이스에 연결된 ON/OFF 가능한 장치들의 ON/OFF 상태
-    -   error response:
-        -   404
-            -   code : 404 (Page Not Found)
-            -   message : ""
-            -   data: {}
-        -   401
-            -   code : 401 (Unauthorized)
-            -   message : ""
-            -   data: {}
--   `POST /api/device` - 디바이스 등록 API
-    -   description : 새로운 디바이스에 대한 정보를 등록합니다.
-    -   method : POST
-    -   URI : /api/device
-    -   request header :
-        -   `Content-Type` : `application/json`
-    -   param : X
-    -   request body:
-        -   device_id(String) : 디바이스 식별 아이디
-        -   device_type(String) : 디바이스의 유형(스위치 or 플러그 or ETC …)
-        -   device_ip(String) : 디바이스 IP Address
-        -   unit_count(Integer) : ON/OFF 가능한 장치의 개수(스위치라고 하면 서보모터의 개수, 플러그이면 SSR의 개수)
-        -   on_off(Array) :
-            -   (Boolean) : 디바이스에 연결된 ON/OFF 가능한 장치들의 ON/OFF 초기 상태
-    -   response header: X
-    -   response body: X
-    -   error response body:
-        -   401
-            -   code:401(Unauthorized)
-            -   message:""
-            -   data:{}
--   `PUT /api/device` - 디바이스 등록 정보 수정 API
-    -   description : 등록된 디바이스 정보를 수정합니다.
-    -   method : PUT
-    -   URI : /api/device
-    -   request header :
-        -   `Content-Type` : `application/json`
-    -   param: X
-    -   request body:
-        -   device_id(String) : 수정할 디바이스의 식별 아이디
-        -   device_type(String) : 디바이스의 유형을 이 값으로 수정
-        -   device_ip(String) : 디바이스 IP Address
-        -   unit_count(int) : ON/OFF 가능한 장치의 개수를 이 값으로 수정
-        -   on_off(Array) :
-            -   (Boolean) : 디바이스에 연결된 ON/OFF 가능한 장치들의 ON/OFF 상태.
-    -   response header: x
-    -   response body: X
-    -   error response body:
-        -   401
-            -   code : 401 (Unauthorized)
-            -   message: ""
-            -   data:{}
-        -   404
-            -   code : 404 (Page Not Found)
-            -   message:""
-            -   data:{}
--   `DELETE /api/device` - 디바이스 등록 정보 삭제 API
-    -   description : 등록된 디바이스 정보를 삭제합니다.
-    -   method : DELETE
-    -   URI : /api/device
-    -   request header :
-        -   `Content-Type` : `application/json`
-    -   param: X
-    -   request body:
-        -   device_id(String) : 삭제할 디바이스의 식별 아이디
-    -   response header: X
-    -   response body: X
-    -   error response body:
-        -   401
-            -   code : 401 (Unauthorized)
-            -   message: ""
-            -   data:{}
-        -   404
-            -   code : 404 (Page Not Found)
-            -   message:""
-            -   data:{}
+- `GET /api/device` - 디바이스 등록 정보 조회 API
+
+  - description : 등록된 디바이스에 대한 정보를 가져옵니다.
+
+  - method : GET
+
+  - URI : /api/device
+
+  -   request header :
+      
+      -   `Content-Type` : `application/json`
+      
+  - param:  device_id(String) : 디바이스의 식별 아이디
+
+  - request body:
+
+  -   response header:
+      
+      -   `Content-Type` : `application/json`
+      -   `Authentication`:`Bearer <token>`
+      
+  - response body:
+
+    - message: " "
+
+    - data : { 
+
+      -   device_type(String) : 디바이스의 유형
+      -   device_ip(String) : 디바이스 IP Address
+      -   unit_count(Integer) : ON/OFF 가능한 장치의 개수
+      -   on_off(Array) :
+          -   (Boolean) : 디바이스에 연결된 ON/OFF 가능한 장치들의 ON/OFF 상태
+
+      }
+
+  - error response:
+    - 404 (Page Not Found)
+
+      -   message : "해당 디바이스 정보를 찾을 수 없습니다."
+      -   data: {}
+    - 401  (Unauthorized)
+
+      -   message : "접근 권한이 없습니다."
+
+      -   data: {}
+- `POST /api/device` - 디바이스 등록 API
+  - description : 새로운 디바이스에 대한 정보를 등록합니다.
+
+  - method : POST
+
+  - URI : /api/device
+
+  -   request header :
+      
+      -   `Content-Type` : `application/json`
+      
+  - param : X
+
+  - request body:
+
+    -   device_id(String) : 디바이스 식별 아이디
+    -   device_type(String) : 디바이스의 유형(스위치 or 플러그 or ETC …)
+    -   device_ip(String) : 디바이스 IP Address
+    -   unit_count(Integer) : ON/OFF 가능한 장치의 개수(스위치라고 하면 서보모터의 개수, 플러그이면 SSR의 개수)
+    -   on_off(Array) :
+        -   (Boolean) : 디바이스에 연결된 ON/OFF 가능한 장치들의 ON/OFF 초기 상태
+
+  - response header: X
+
+  - response body: 
+
+    - 200
+
+      -   message : "디바이스 정보가 등록되었습니다."
+      -   data:{}
+
+      
+- `PUT /api/device` - 디바이스 등록 정보 수정 API
+
+  -   description : 등록된 디바이스 정보를 수정합니다.
+  -   method : PUT
+  -   URI : /api/device
+  -   request header :
+      -   `Content-Type` : `application/json`
+  -   param: X
+  -   request body:
+      -   device_id(String) : 수정할 디바이스의 식별 아이디
+      -   device_type(String) : 디바이스의 유형을 이 값으로 수정
+      -   device_ip(String) : 디바이스 IP Address
+      -   unit_count(int) : ON/OFF 가능한 장치의 개수를 이 값으로 수정
+      -   on_off(Array) :
+          -   (Boolean) : 디바이스에 연결된 ON/OFF 가능한 장치들의 ON/OFF 상태.
+  -   response header: x
+  -   response body: 
+      -   200
+          -   message : "디바이스 정보가 수정되었습니다."
+          -   data :{} 
+  -   error response body:
+      -   404 (Page Not Found)
+          -   message:"수정할 디바이스 정보를 찾을 수 없습니다,"
+          -   data:{}
+- `DELETE /api/device` - 디바이스 등록 정보 삭제 API
+
+  -   description : 등록된 디바이스 정보를 삭제합니다.
+  -   method : DELETE
+  -   URI : /api/device
+  -   request header :
+      -   `Content-Type` : `application/json`
+      -   `Authentication`:`Bearer <token>`
+  -   param: X
+  -   request body:
+      -   device_id(String) : 삭제할 디바이스의 식별 아이디
+  -   response header: X
+  -   response body: 
+      -   200
+          -   message: "디바이스 정보가 삭제되었습니다."
+          -   data :{}
+  -   error response body:
+      -   401 (Unauthorized)
+          -   message: "접근 권한이 없습니다."
+          -   data:{}
+      -   404 (Page Not Found)
+          -   message:"삭제할 디바이스 정보를 찾을 수 없습니다."
+          -   data:{}
 
 ## Device Control API
 
@@ -136,63 +165,72 @@
     -   URI: /api/device/control
     -   request header:
         -   `Content-Type`:`application/json`
+        -   `Authentication`:`Bearer <token>`
     -   param: X
     -   request body:
         -   device_id(String): 제어할 디바이스의 식별 아이디
         -   on_off(Boolean): true일경우 ON, false일경우 OFF
     -   response header: X
-    -   response body: X
-    -   error response body:
-        -   401
-            -   code : 401 (Unauthorized)
-            -   message: ""
+    -   response body: 
+        -   200
+            -   message:"디바이스를 성공적으로 제어했습니다."
             -   data:{}
-        -   404
-            -   code : 404 (Page Not Found)
-            -   message:""
+    -   error response body:
+        -   401  (Unauthorized)
+            -   message: "접근 권한이 없습니다."
+            -   data:{}
+        -   404 (Page Not Found)
+            -   message:"제어할 디바이스 정보를 찾을 수 없습니다."
             -   data:{}
 
 ## RaspberryPi API
 
--   `POST /api/raspberry/connect` - 라즈베리파이 연결 API
-    -   description : 라즈베리파이와 연결합니다.
-    -   method : POST
-    -   URI : /api/raspberry/connect
-    -   request header :
-        -   `Content-Type`:`application/json`
-    -   param : X
-    -   request body:
-        -   raspberry_group(String) : 조회할 그룹
-        -   raspberry_id(String) : 조회할 라즈베리파이 식별 아이디
-        -   raspberry_pw(String) : 조회할 라즈베리파이 비밀번호
-    -   response header :
-        -   `Content-Type` : `application/json`
-    -   response body:
-        -   token : ''
-    -   error response body:
-        -   400
-            -   code : 400 (Bad Request)
-            -   message : "아이디 혹은 패스워드가 일치하지 않습니다."
-            -   data:{}
+- `POST /api/raspberry/connect` - 라즈베리파이 연결 API
+  -   description : 라즈베리파이와 연결합니다.
+  -   method : POST
+  -   URI : /api/raspberry/connect
+  -   request header :
+      
+      -   `Content-Type`:`application/json`
+  -   param : X
+  -   request body:
+      -   raspberry_group(String) : 조회할 그룹
+      -   raspberry_id(String) : 조회할 라즈베리파이 식별 아이디
+      -   raspberry_pw(String) : 조회할 라즈베리파이 비밀번호
+  -   response header :
+      
+      -   `Content-Type` : `application/json`
+  -   response body :
+      
+      -   access_token :  ''"
+      -   refresh_token : ""
+  - error response body:
+    - 400 (Bad Request)
+
+      -   message : "아이디 혹은 패스워드가 일치하지 않습니다."
+      -   data:{}
+
+      
 -   `GET /api/raspberry` - 라즈베리파이 등록 정보 조회 API
--   description : 라즈베리파이 등록 정보를 가져옵니다.
-    -   method : POST
-    -   URI : /api/raspberry
-    -   request header : X
-    -   param :
-        -   token : Jwt 토큰
-    -   request body: X
-    -   response header :
-        -   `Content-Type` : `application/json`
-    -   response body:
-        -   raspberry_group(String) : 조회할 그룹
-        -   raspberry_id(String) : 라즈베리파이 식별 아이디
-        -   remote_control(Boolean) : 원격 제어 허용/비허용. 비허용 시 웹/앱 등에서 라즈베리파이에 연결 불가능. 만약 False 시 raspberry_devices는 빈 배열.
-        -   raspberry_devices(Array) :
-            -   device_id : 조회한 라즈베리파이에 연결된 디바이스 식별 아이디
-            -   device_type(String) : 조회한 라즈베리파이에 연결된 디바이스 유형
-    -   error response body:
+- description : 라즈베리파이 등록 정보를 가져옵니다.
+  -   method : POST
+  -   URI : /api/raspberry
+  -   request header : 
+      -   `Authentication`:`Bearer <token>`
+  -   param : X
+  -   request body: X
+  -   response header :
+      -   `Content-Type` : `application/json`
+  -   response body:
+      -   raspberry_group(String) : 조회할 그룹
+      -   raspberry_id(String) : 라즈베리파이 식별 아이디
+      -   remote_control(Boolean) : 원격 제어 허용/비허용. 비허용 시 웹/앱 등에서 라즈베리파이에 연결 불가능. 만약 False 시 raspberry_devices는 빈 배열.
+      -   raspberry_devices(Array) :
+          -   device_id : 조회한 라즈베리파이에 연결된 디바이스 식별 아이디
+          -   device_type(String) : 조회한 라즈베리파이에 연결된 디바이스 유형
+  -   error response body:
 -   `POST /api/raspberry` - 라즈베리파이 등록 API
+    
     -   description : 새로운 라즈베리파이 정보를 등록합니다.
     -   method: POST - URI : /api/raspberry
     -   request header :
@@ -207,7 +245,9 @@
             -   device_id : 조회한 라즈베리파이에 연결된 디바이스 식별 아이디
             -   device_type(String) : 조회한 라즈베리파이에 연결된 디바이스 유형
     -   response header: X
-    -   response body: X
+    -   response body: 
+        -   201 (Created)
+            -   "message": "라즈베리파이 정보가 등록되었습니다."
     -   error response body:
 -   `PUT /api/raspberry` - 라즈베리파이 등록 정보 수정 API
     -   description : 등록된 라즈베리파이 정보를 수정합니다.
@@ -226,18 +266,19 @@
     -   response header: X
     -   response body: X
     -   error response body:
--   `DELETE /api/raspberry` - 라즈베리파이 등록 정보 삭제 API
-    -   description : 등록된 라즈베리파이 정보를 삭제합니다.
-    -   method : DELETE
-    -   URI : /api/raspberry
-    -   request header :
-        -   `Content-Type` : `application/json`
-    -   param: X
-    -   request body:
-        -   token: JWT
-    -   response header: X
-    -   response body: X
-    -   error response body:
+- `DELETE /api/raspberry` - 라즈베리파이 등록 정보 삭제 API
+  -   description : 등록된 라즈베리파이 정보를 삭제합니다.
+  -   method : DELETE
+  -   URI : /api/raspberry
+  -   request header :`Authentication`:`Bearer <token>`
+  -   param: X
+  -   request body:
+  -   response header: X
+  -   response body: X
+  -   error response body:
+      -   401  (Unauthorized)
+          -   message: "접근 권한이 없습니다."
+          -   data:{}
 
 ## Usage-Time API
 
