@@ -43,15 +43,15 @@
   -   request header :
       
       -   `Content-Type` : `application/json`
+      -   `Authentication`:`Bearer <token>`
       
-  - param:  device_id(String) : 디바이스의 식별 아이디
-
-  - request body:
-
+- param:  device_id(String) : 디바이스의 식별 아이디
+  
+- request body:
+  
   -   response header:
       
       -   `Content-Type` : `application/json`
-      -   `Authentication`:`Bearer <token>`
       
   - response body:
 
@@ -108,7 +108,6 @@
       -   message : "디바이스 정보가 등록되었습니다."
       -   data:{}
 
-      
 - `PUT /api/device` - 디바이스 등록 정보 수정 API
 
   -   description : 등록된 디바이스 정보를 수정합니다.
@@ -210,7 +209,6 @@
       -   message : "아이디 혹은 패스워드가 일치하지 않습니다."
       -   data:{}
 
-      
 -   `GET /api/raspberry` - 라즈베리파이 등록 정보 조회 API
 - description : 라즈베리파이 등록 정보를 가져옵니다.
   -   method : POST
