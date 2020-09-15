@@ -44,7 +44,7 @@
       
       -   `Content-Type` : `application/json`
       -   `Authentication`:`Bearer <token>`
-      
+  
 - param:  device_id(String) : 디바이스의 식별 아이디
   
 - request body:
@@ -211,7 +211,7 @@
 
 -   `GET /api/raspberry` - 라즈베리파이 등록 정보 조회 API
 - description : 라즈베리파이 등록 정보를 가져옵니다.
-  -   method : POST
+  -   method : GET
   -   URI : /api/raspberry
   -   request header : 
       -   `Authentication`:`Bearer <token>`
