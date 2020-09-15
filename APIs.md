@@ -208,7 +208,9 @@
 
       -   message : "아이디 혹은 패스워드가 일치하지 않습니다."
       -   data:{}
-
+    
+      
+  
 -   `GET /api/raspberry` - 라즈베리파이 등록 정보 조회 API
 - description : 라즈베리파이 등록 정보를 가져옵니다.
   -   method : GET
