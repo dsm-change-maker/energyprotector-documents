@@ -1,4 +1,4 @@
-# Database
+# 1Database
 
 
 
@@ -34,19 +34,19 @@
 
 - key : Integer, primary_key - 유닛 키 값
 - index : Integer - 유닛들 인덱스
-- device_id : Integer, foreign_key - 디바이스 키
+- device_key : Integer, foreign_key - 디바이스 키
 - on_off : Boolean - 온오프
 - start : Date time -  켜진 시간 저장
 
 
 
-| key  | index | device_id | on_off | start            |
-| ---- | ----- | --------- | ------ | ---------------- |
-| 1    | 0     | "dsm11_1" | True   |                  |
-| 2    | 1     | "dsm11_1" | False  | 2020-09-20-21:30 |
-| 3    | 2     | "dsm11_1" | False  |                  |
-| 4    | 0     | "dsm11_2" | True   | 2020-09-20-16:27 |
-| 5    | 1     | "dsm11_2" | False  |                  |
+| key  | index | device_key | on_off | start            |
+| ---- | ----- | ---------- | ------ | ---------------- |
+| 1    | 0     | 1          | True   |                  |
+| 2    | 1     | 1          | False  | 2020-09-20-21:30 |
+| 3    | 2     | 1          | False  |                  |
+| 4    | 0     | 2          | True   | 2020-09-20-16:27 |
+| 5    | 1     | 2          | False  |                  |
 
 
 
@@ -55,7 +55,7 @@
 - key : Integer, primary_key
 - rasp_key : Integer, foreign_key
 - time : Integer(초 단위)
-- date : Datetime
+- date : String(문자열)
 
 | key  | rasp_key | time | date       |
 | ---- | -------- | ---- | ---------- |
