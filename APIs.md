@@ -201,8 +201,7 @@
       -   refresh_token : ""
   - error response body:
     - 400 (Bad Request)
-
-      -   message : "아이디 혹은 패스워드가 일치하지 않습니다."
+-   message : "아이디 혹은 패스워드가 일치하지 않습니다."
       -   data:{}
     
 
@@ -322,33 +321,116 @@
 
 
 
-## Aeb API
+## Web API
 
-- `POST api/web/login` - 로그인
+- `POST /api/web/login` - 로그인
+
+  - description : 등록된 라즈베리파이 로그인.
+
+  - method : POST
+
+  - URI : /api/web/login
+
+  - request header :`content-type`:`application/json`
+
+  - param: X
+
+  - request body:
+
+    - raspberry_group : 라즈베리파이 그룹
+    - raspberry_id : 라즈베리파이 아이디
+    - raspberry_pw : 라즈베리파이 패스워드
+
+  - response header: 
+
+  - response body: 
+
+    - 200:
+      - access_token : 
+      - refresh_token:
+
+  - error response body:
+
+    - 400 (Bad Request)
+
+      -   message : "아이디 혹은 패스워드가 일치하지 않습니다."
+      -   data:{}
+
+      
+
 - `GET api/web/devices`
-- `GET api/web/units`
-- `POST /api/device/control` - 디바이스 제어 API
-  -   description : 디바이스의 상태(ON/OFF)를 변화시킵니다.
-  -   method : POST
-  -   URI: /api/device/control
-  -   request header:
-      -   `Content-Type`:`application/json`
-      -   `Authentication`:`Bearer <token>`
-  -   param: index - 유닛 인덱스
-  -   request body:
-      -   device_id(String): 제어할 디바이스의 식별 아이디
-      -   unit_index(Integer) : 제어할 유닛의 인덱스
-      -   on_off(Boolean): true일경우 ON, false일경우 OFF
-  -   response header: X
-  -   response body: 
-      -   200
-          -   message:"디바이스를 성공적으로 제어했습니다."
-          -   data:{}
-  -   error response body:
-      -   401  (Unauthorized)
-          -   message: "접근 권한이 없습니다."
-          -   data:{}
-      -   404 (Page Not Found)
-          -   message:"제어할 디바이스 정보를 찾을 수 없습니다."
-          -   data:{}
 
+  - description : 디바이스들의 정보를 가져온다.
+
+  - method : GET
+
+  - URI : /api/web/devices
+
+  - request header :
+
+    - `authorization`: `Bearer <token>`
+
+  - param: X
+
+  - request body: X
+
+  - response header: 
+
+  - response body: 
+
+    - 200:
+
+      - devices:[
+
+        - {
+        - "device_id" : "dsm11_1" - 디바이스 아이디
+        - "device_type" : "switch", - 디바이스 타입
+        - "unit_count" : 3   - 디바이스마다 유닛들 갯수
+        - }
+
+        ]
+
+  - error response body:
+
+    - 401 (Unauthorized)
+
+      -   message : "접근 권한이 없습니다."
+      -   data:{}
+
+      
+
+- `GET api/web/units`
+
+  - description : 유닛들의 정보를 가져온다. 디바이스들의 정보에서 가져온 유닛들의 갯수를 받고 인덱스로 접근하면 된다.
+
+  - method : POST
+
+  - URI : /api/web/units
+
+  - request header :`content-type`:`application/json`
+
+  - param: X
+
+  - request body: 
+
+    - "unit_count" : 3 - 유닛들의 갯수 
+    - "device_id" : "dsm11_1" - 유닛들이 속한 디바이스의 아이디
+
+  - response header: 
+
+  - response body: 
+
+    - 200:
+
+      - units : [
+
+        - "index" : 0 - 유닛 인덱스
+        - "on_off" : true - 유닛이 켜져있는지 꺼져있는지
+
+        ]
+
+  - error response body:
+
+    - 401 (Unauthorized)
+      -   message : "아이디 혹은 패스워드가 일치하지 않습니다."
+      -   data:{}
