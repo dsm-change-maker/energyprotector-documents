@@ -9,8 +9,7 @@
 -   [Device API](#device-api)
 -   [Device Control API](#device-control-api)
 -   [RaspberryPi API](#raspberrypi-api)
--   [Usage-Time API](#usage-time-api)
--   [Web API](#Web API)
+-   [Web API](#web-api)
 
 ## 공통
 
