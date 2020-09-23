@@ -163,6 +163,7 @@
       -   `Content-Type`:`application/json`
   -   param : X
   -   request body:
+      -   raspberry_group(String) : 조회할 라즈베리파이 그룹
       -   raspberry_id(String) : 조회할 라즈베리파이 식별 아이디
       -   raspberry_pw(String) : 조회할 라즈베리파이 비밀번호
   -   response header :
