@@ -201,10 +201,7 @@
       -   `Content-Type`:`application/json`
       -   `Authentication`:`Bearer <token>`
       
-  - param : 
-
-    -   device_id(String) : 연결한 라즈베리파이의 디바이스 식별 아이디
-    -   device_type(String)  : 연결한 라즈베리파이의 디바이스 타입
+  - param : X
 
   - request body: 
 
