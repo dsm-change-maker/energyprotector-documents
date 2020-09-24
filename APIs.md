@@ -25,8 +25,7 @@
 ```json
 {
     "message": "",
-    "data": {
-    }
+    "data": ""
 }
 ```
 
@@ -66,11 +65,13 @@
 
   - error response:
     - 404 (Page Not Found)
-  -   message : "해당 디바이스 정보를 찾을 수 없습니다."
-      -   data: {}
+
+      -   message : "해당 디바이스 정보를 찾을 수 없습니다."
     - 401  (Unauthorized)
-    -   message : "접근 권한이 없습니다."
-    -   data: {}
+    
+    - message : "접근 권한이 없습니다."
+    
+      
 
 
 
@@ -94,11 +95,13 @@
 
     - 200
       - message : "디바이스 정보가 등록되었습니다."
-      - data:{}
+      
+        
   - error response body:
     - 401 (Unauthorized)
       - message: "접근 권한이 없습니다."
-      - data:{}
+      
+        
       
       
 
@@ -115,14 +118,18 @@
       -   device_type(String) : 디바이스의 유형을 이 값으로 수정
       -   device_ip(String) : 디바이스 IP Address
   -   response header: x
+  
   -   response body: 
       -   200
-          -   message : "디바이스 정보가 수정되었습니다."
-          -   data :{} 
+          
+          - message : "디바이스 정보가 수정되었습니다."
+          
+            
   -   error response body:
       -   404 (Page Not Found)
-          -   message : "수정할 디바이스 정보를 찾을 수 없습니다,"
-          -   data:{}
+          - message : "수정할 디바이스 정보를 찾을 수 없습니다,"
+          
+            
 - `DELETE /api/device` - 디바이스 등록 정보 삭제 API
 
   -   description : 등록된 디바이스 정보를 삭제합니다.
@@ -139,16 +146,20 @@
   -   response header: X
   -   response body: 
       -   200
-          -   message: "디바이스 정보가 삭제되었습니다."
-          -   data :{}
+          
+          - message: "디바이스 정보가 삭제되었습니다."
+          
+            
   -   error response body:
       -   401 (Unauthorized)
           
-          -   message: "접근 권한이 없습니다."
-          -   data:{}
+          - message: "접근 권한이 없습니다."
+          
+            
       -   404 (Page Not Found)
-          -   message:"삭제할 디바이스 정보를 찾을 수 없습니다."
-          -   data:{}
+          - message:"삭제할 디바이스 정보를 찾을 수 없습니다."
+          
+            
           
           
 
@@ -259,22 +270,32 @@
   -   error response body:
 - `DELETE /api/raspberry` - 라즈베리파이 등록 정보 삭제 API
   
-  -   description : 등록된 라즈베리파이 정보를 삭제합니다.
-  -   method : DELETE
-  -   URI : /api/raspberry
-  -   request header :
-      -   `Authentication`:`Bearer <token>`
-  -   param: X
-  -   request body:
-  -   response header: X
-  -   response body: X
+  - description : 등록된 라즈베리파이 정보를 삭제합니다.
+  
+  - method : DELETE
+  
+  - URI : /api/raspberry
+  
+  - request header :
+  
+    -   `Authentication`:`Bearer <token>`
+  
+  - param: X
+  
+  - request body:
+  
+  - response header: X
+  
+  - response body: X
+  
   -   error response body:
       -   404 (Not Found)
           -   message : "삭제할 라즈베리파이 정보가 없습니다."
-          -   data : {}
       -   401  (Unauthorized)
-          -   message: "접근 권한이 없습니다."
-          -   data:{}
+          
+          - message: "접근 권한이 없습니다."
+          
+            
 
 
 
@@ -309,11 +330,12 @@
   
   - 400 (Bad Request)
   
-    -   message : "아이디 혹은 패스워드가 일치하지 않습니다."
-      -   data:{}
-  
+    - message : "아이디 혹은 패스워드가 일치하지 않습니다."
+      
     
-  
+    
+      
+
 - `GET api/web/devices`
 
   - description : 디바이스들의 정보를 가져온다.
@@ -350,9 +372,10 @@
 
     - 401 (Unauthorized)
 
-      -   message : "접근 권한이 없습니다."
-      -   data:{}
-
+      - message : "접근 권한이 없습니다."
+      
+    
+      
       
 
 - `GET api/web/units`
@@ -388,8 +411,9 @@
   - error response body:
 
     - 401 (Unauthorized)
-      -   message : "아이디 혹은 패스워드가 일치하지 않습니다."
-      -   data:{}
+      - message : "아이디 혹은 패스워드가 일치하지 않습니다."
+      
+        
 
   
 
