@@ -189,10 +189,10 @@
     
 
 
-- `POST /api/raspberry` - 라즈베리파이 등록 정보 조회 API
+- `GET /api/raspberry` - 라즈베리파이 등록 정보 조회 API
 
 - description : 라즈베리파이 등록 정보를 가져옵니다.
-  - method : POST
+  - method : GET
 
   - URI : /api/raspberry
 
@@ -201,12 +201,12 @@
       -   `Content-Type`:`application/json`
       -   `Authentication`:`Bearer <token>`
       
-  - param : X
-
-  - request body: 
+  - param : 
 
     -   device_id(String) : 연결한 라즈베리파이의 디바이스 식별 아이디
     -   device_type(String)  : 연결한 라즈베리파이의 디바이스 타입
+
+  - request body: 
 
   -   response header :
       
