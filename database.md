@@ -1,20 +1,25 @@
-# 1Database
+# Database
 
 
 
 ## Device
 
-- key : Integer, primary_key - 디바이스 키 값
-- id : String(64) - 디바이스 아이디
--  ip : String(32) - 디바이스 아이피
--  type : String(64) - 디바이스 타입
--  unit_count : Integer - On/Off 가능한 장치 수
-- rasp_key : Integer, foreign_key - 라즈베리파이의 키 값을 가지는 외래키
+- key : Integer, primary_key - 디바이스 키
 
-| key  | ip          | type     | unit_count | rasp_key | id        |
-| ---- | ----------- | -------- | ---------- | -------- | --------- |
-| 1    | "127.0.0.1" | "switch" | 3          | 1        | "dsm11_1" |
-| 2    | "127.0.0.2" | "button" | 2          | 1        | "dsm11_2" |
+- id : String(64) - 디바이스 아이디
+
+- type : String(64) - 디바이스 타입
+
+- unit_count : Integer - On/Off 가능한 장치 
+
+- ip : String(32) - 디바이스 아이피
+
+  
+
+| key  | id        | type     | unit_count | ip          |
+| ---- | --------- | -------- | ---------- | ----------- |
+| 1    | "dsm11_1" | "switch" | 3          | "127.0.0.1" |
+| 2    | "dsm11_2" | "button" | 2          | "127.0.0.2" |
 
 ## Raspberry
 
@@ -23,10 +28,11 @@
 - pw : String(64) - 라즈베리파이 패스워드 값
 - group : String(64) - 라즈베리파이 그룹 값
 - remote_control : Boolean - 라즈베리 파이 원격 제어 허용
+- devices : Text - 라즈베리파이에 연결된 디바이스들의 id와 type 정보
 
-| key  | pw     | group                      | remote_control | id      |
-| ---- | ------ | -------------------------- | -------------- | ------- |
-| 1    | "1234" | "대덕소프트웨어마이스터고" | True           | "dsm11" |
+| key  | id      | pw     | group | remote_control | devices                          |
+| ---- | ------- | ------ | ----- | -------------- | -------------------------------- |
+| 1    | "dsm11" | "1234" | "dsm" | True           | "dsm11_1;switch,dsm11_2;button," |
 
 
 
@@ -53,13 +59,12 @@
 ## UsingTime
 
 - key : Integer, primary_key
-- rasp_key : Integer, foreign_key
 - time : Integer(초 단위)
 - date : String(문자열)
 
-| key  | rasp_key | time | date       |
-| ---- | -------- | ---- | ---------- |
-| 1    | 1        | 324  | 2020-09-20 |
+| key  | time | date       |
+| ---- | ---- | ---------- |
+| 1    | 324  | 2020-09-20 |
 
 
 
