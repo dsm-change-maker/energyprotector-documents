@@ -7,7 +7,6 @@
 -   [공통](#공통)
 -   [API Response 구조](#api-response-구조)
 -   [Device API](#device-api)
--   [Device Control API](#device-control-api)
 -   [RaspberryPi API](#raspberrypi-api)
 -   [Web API](#web-api)
 
@@ -96,9 +95,10 @@
     - 200
       - message : "디바이스 정보가 등록되었습니다."
       
-        
+    
   - error response body:
     - 401 (Unauthorized)
+      
       - message: "접근 권한이 없습니다."
       
         
@@ -124,12 +124,12 @@
           
           - message : "디바이스 정보가 수정되었습니다."
           
-            
+      
   -   error response body:
       -   404 (Page Not Found)
           - message : "수정할 디바이스 정보를 찾을 수 없습니다,"
           
-            
+  
 - `DELETE /api/device` - 디바이스 등록 정보 삭제 API
 
   -   description : 등록된 디바이스 정보를 삭제합니다.
@@ -149,19 +149,62 @@
           
           - message: "디바이스 정보가 삭제되었습니다."
           
-            
+      
   -   error response body:
       -   401 (Unauthorized)
           
           - message: "접근 권한이 없습니다."
           
             
+          
       -   404 (Page Not Found)
-          - message:"삭제할 디바이스 정보를 찾을 수 없습니다."
-          
-            
+          -   message:"삭제할 디바이스 정보를 찾을 수 없습니다."
           
           
+
+- `POST /api/device/control` - 디바이스 컨트롤 API
+
+  - description : 디바이스에 연결된 유닛들을 컨트롤 합니다.
+
+  - method : POST
+
+  - URI : /api/device
+
+  - request header :
+
+    -   `Content-Type` : `application/json`
+    -   `Authentication`:`Bearer <token>`
+
+  - param: X
+
+  - request body:
+
+    -   device_id(String) : 삭제할 디바이스의 식별 아이디
+    -   device_type(String) : 삭제할 디바이스의 타입
+    -   on_off(Boolean) : 유닛의 킬지 말지 정한다.
+    -   unit_index(Integer) : 유닛의 인덱스
+
+  - response header: X
+
+  - response body: 
+
+    - 200
+
+      - message: "디바이스를 성공적으로 제어했습니다."
+
+        
+
+  - error response body:
+
+    - 401 (Unauthorized)
+
+      - message: "접근 권한이 없습니다."
+
+        
+
+    - 404 (Page Not Found)
+
+      -   message:"삭제할 디바이스 정보를 찾을 수 없습니다."
 
 ## RaspberryPi API
 
@@ -234,24 +277,43 @@
 
   
 
--   `POST /api/raspberry` - 라즈베리파이 등록 API
+- `POST /api/raspberry` - 라즈베리파이 등록 API
 
-    -   description : 새로운 라즈베리파이 정보를 등록합니다.
-    -   method: POST - URI : /api/raspberry
-    -   request header :
-        -   `Content-Type` : `application/json`
-            -   param: X
-            -   request body
-                -   raspberry_group(String) : 라즈베리파이가 속한 그룹 아이디(ex DSM_blabla)
-                -   raspberry_id(String) : 라즈베리파이 식별 아이디(디바이스 연결 시 사용)
-                -   raspberry_pw(String) : 라즈베리파이 비밀번호(디바이스 연결 시 사용)
-                -   remote_control(Boolean) : 원격 제어 허용/비허용. 비허용 시 웹/앱 등에서 라즈베리파이에 연결 불가능.
-    -   response header: X
-    -   response body: 
-        -   201 (Created)
-            -   "message": "라즈베리파이 정보가 등록되었습니다."
-    -   error response body:
-    
+  - description : 새로운 라즈베리파이 정보를 등록합니다.
+
+  - method: POST - URI : /api/raspberry
+
+  - request header :
+    - `Content-Type` : `application/json`
+
+      -   param: X
+      - request body
+        - raspberry_group(String) : 라즈베리파이가 속한 그룹 아이디(ex DSM_blabla)
+
+        - raspberry_id(String) : 라즈베리파이 식별 아이디(디바이스 연결 시 사용)
+
+        - raspberry_pw(String) : 라즈베리파이 비밀번호(디바이스 연결 시 사용)
+
+        - remote_control(Boolean) : 원격 제어 허용/비허용. 비허용 시 웹/앱 등에서 라즈베리파이에 연결 불가능.
+
+        - devices(Array) : [{
+
+          - device_id(String) : 디바이스 아이디
+
+          - device_ip(String) : 디바이스 아이피
+
+            }]
+
+  - response header: X
+
+  -   response body: 
+      -   201 (Created)
+          -   "message": "라즈베리파이 정보가 등록되었습니다."
+      
+  -   error response body:
+
+  
+
 - `PUT /api/raspberry` - 라즈베리파이 등록 정보 수정 API
 
   -   description : 등록된 라즈베리파이 정보를 수정합니다.
@@ -290,6 +352,7 @@
   
   -   error response body:
       -   404 (Not Found)
+          
           -   message : "삭제할 라즈베리파이 정보가 없습니다."
       -   401  (Unauthorized)
           
@@ -325,7 +388,7 @@
 
     - 200:
       - access_token : 
-    
+  
 - error response body:
   
   - 400 (Bad Request)
@@ -334,7 +397,7 @@
       
     
     
-      
+    
 
 - `GET api/web/devices`
 
@@ -391,9 +454,10 @@
     - `content-type`:`application/json`
     - `authorization`: `Bearer <token>`
 
-  - param: "device_id" : "dsm11_1" - 유닛들이 속한 디바이스의 아이디
+  - param: 
 
-  - request body: X
+    - "device_id" : "dsm11_1" - 유닛들이 속한 디바이스의 아이디
+    - request body: X
 
   - response header: 
 
@@ -410,8 +474,9 @@
 
   - error response body:
 
-    - 401 (Unauthorized)
-      - message : "아이디 혹은 패스워드가 일치하지 않습니다."
+    - 400 (Page Not Found)
+      
+      - message : "잘못된 요청입니다."
       
         
 
