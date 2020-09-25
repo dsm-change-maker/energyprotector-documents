@@ -300,7 +300,7 @@
 
           - device_id(String) : 디바이스 아이디
 
-          - device_ip(String) : 디바이스 아이피
+          - device_type(String) : 디바이스 아이피
 
             }]
 
