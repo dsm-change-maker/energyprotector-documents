@@ -457,7 +457,9 @@
   - param: 
 
     - "device_id" : "dsm11_1" - 유닛들이 속한 디바이스의 아이디
-    - request body: X
+    - "device_type" :"switch" - 유닛들이 속한 디바이스의 타입
+
+  - request body: X
 
   - response header: 
 
