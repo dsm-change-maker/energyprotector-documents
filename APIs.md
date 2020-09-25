@@ -204,7 +204,7 @@
 
     - 404 (Page Not Found)
 
-      -   message:"삭제할 디바이스 정보를 찾을 수 없습니다."
+      -   message:"컨트롤할 디바이스 정보를 찾을 수 없습니다."
 
 ## RaspberryPi API
 
