@@ -427,7 +427,7 @@
         - "device_id" : "dsm11_1" - 디바이스 아이디
         - "device_type" : "switch", - 디바이스 타입
         - "unit_count" : 3   - 디바이스마다 유닛들 갯수
-        - "unit_info" : [false, true, false]   - 디바이스마다 유닛들 갯수
+        - "unit_info" : [false, true, false]   - 디바이스의 유닛들마다 on/off상태
   - }
         
       ]
