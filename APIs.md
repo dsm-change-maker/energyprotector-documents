@@ -427,62 +427,19 @@
         - "device_id" : "dsm11_1" - 디바이스 아이디
         - "device_type" : "switch", - 디바이스 타입
         - "unit_count" : 3   - 디바이스마다 유닛들 갯수
-        - }
-
-        ]
-
-  - error response body:
-
-    - 401 (Unauthorized)
-
-      - message : "접근 권한이 없습니다."
-      
-    
-      
-      
-
-- `GET api/web/units`
-
-  - description : 유닛들의 정보를 가져온다. 디바이스들의 정보에서 가져온 유닛들의 갯수를 받고 인덱스로 접근하면 된다.
-
-  - method : GET
-
-  - URI : /api/web/units
-
-  - request header :
-
-    - `content-type`:`application/json`
-    - `authorization`: `Bearer <token>`
-
-  - param: 
-
-    - "device_id" : "dsm11_1" - 유닛들이 속한 디바이스의 아이디
-    - "device_type" :"switch" - 유닛들이 속한 디바이스의 타입
-
-  - request body: X
-
-  - response header: 
-
-  - response body: 
-
-    - 200:
-
-      - units : [
-
-        - "index" : 0 - 유닛 인덱스
-        - "on_off" : true - 유닛이 켜져있는지 꺼져있는지
-
-        ]
-
-  - error response body:
-
-    - 400 (Page Not Found)
-      
-      - message : "잘못된 요청입니다."
-      
+        - "unit_info" : [false, true, false]   - 디바이스마다 유닛들 갯수
+  - }
         
-
+      ]
   
+- error response body:
+  
+  - 401 (Unauthorized)
+  - message : "접근 권한이 없습니다."
+      
+  
+
+
 
 - `GET /api/web/using-time` - 사용시간 조회 API
 
