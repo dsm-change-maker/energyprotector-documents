@@ -29,10 +29,11 @@
 - group : String(64) - 라즈베리파이 그룹 값
 - remote_control : Boolean - 라즈베리 파이 원격 제어 허용
 - devices : Text - 라즈베리파이에 연결된 디바이스들의 id와 type 정보
+- start_date : String(32) - 라즈베리를 설치하여 작동을 시작한 날짜
 
-| key  | id      | pw     | group | remote_control | devices                          |
-| ---- | ------- | ------ | ----- | -------------- | -------------------------------- |
-| 1    | "dsm11" | "1234" | "dsm" | True           | "dsm11_1;switch,dsm11_2;button," |
+| key  | id      | pw     | group | remote_control | devices                          | start_date |
+| ---- | ------- | ------ | ----- | -------------- | -------------------------------- | ---------- |
+| 1    | "dsm11" | "1234" | "dsm" | True           | "dsm11_1;switch,dsm11_2;button," | 2020_09_26 |
 
 
 
@@ -58,13 +59,37 @@
 
 ## UsingTime
 
-- key : Integer, primary_key
+### UsingTimeDay
+
+- key : Integer, primary_key ; 라즈베리파이의 키 값과 같다
 - time : Integer(초 단위)
 - date : String(문자열)
 
 | key  | time | date       |
 | ---- | ---- | ---------- |
 | 1    | 324  | 2020-09-20 |
+
+### UsingTimeMonth
+
+- key : Integer, primary_key - 라즈베리파이의 키 값과 같다
+- time : Integer(초 단위)
+- date : String(문자열)
+
+| key  | time | date    |
+| ---- | ---- | ------- |
+| 1    | 324  | 2020-09 |
+
+### UsingTimeYear
+
+- key : Integer, primary_key - 라즈베리파이의 키 값과 같다
+- time : Integer(초 단위)
+- date : String(문자열)
+
+| key  | time | date |
+| ---- | ---- | ---- |
+| 1    | 324  | 2020 |
+
+
 
 
 
