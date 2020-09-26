@@ -484,42 +484,44 @@
 
   
 
--   `GET /api/web/using-time` - 사용시간 조회 API
-    
-    -   description : 라즈베리파이의 전력 사용시간을 조회합니다.
-    -   method: GET
-    -   URI: /api/web/using-time
-    -   request header: X
-    -   param:
-        -   raspberry_group(String) : 라즈베리파이가 속한 그룹 아이디
-        -   raspberry_id(String) : 라즈베리파이 식별 아이디, 빈 문자열일 경우 그룹 내 전체 라즈베리파이를 대상으로 조회
-        -   sort(Boolean) : usage_time을 기준으로 true시 오름차순 정렬. false시 내림차순 정렬.
-        -   year(Boolean) : 최근 year_n년동안의 전력 사용시간 조회. False 시 조회하지 않음
-        -   year_n(Integer) : 최근 몇 년을 조회할 것인지 결정. year가 False일 경우 의미 없음.
-        -   month(Boolean) : 최근 month_n달동안의 전력 사용시간 조회. False 시 조회하지 않음.
-        -   month_n(Integer) : 최근 몇 달을 조회할 것인지 결정. month가 False일 경우 의미없음.
-        -   week(Boolean) : 최근 week_n주동안의 전력 사용시간 조회. False 시 조회하지 않음
-        -   week_n(Integer) : 최근 몇 주를 조회할 것인지 결정. week가 False일 경우 의미없음.
-        -   day(Boolean) : 최근 day_n일 동안의 전력 사용시간 조회. False 시 조회하지 않음.
-        -   day_n(Integer) : 최근 며칠을 조회할 것인지 결정. day가 False일 경우 의미없음.
-    -   request body: X
-    -   response header:
-        -   `Content-Type` : `application/json`
-    -   response body:
-        -   usage_times:
-            -   year(Array): 최근 year_n년 동안의 전력 사용시간. year가 false일경우 빈 배열.
-                -   raspberry_id(String) : 라즈베리파이 아이디
-                -   usage_time(Double) : 사용 시간(단위: 시간. 소수점 아래 : 분)
-            -   month(Array): 최근 month_n달 동안의 전력 사용시간. month가 false일경우 빈 배열.
-                -   raspberry_id(String) : 라즈베리파이 아이디
-                -   usage_time(Double) : 사용 시간(단위: 시간. 소수점 아래 : 분)
-            -   week(Array): 최근 week_n주 동안의 전력 사용시간.week가 false일경우 빈 배열.
-                -   raspberry_id(String) : 라즈베리파이 아이디
-                -   usage_time(Double) : 사용 시간(단위: 시간. 소수점 아래 : 분)
-            -   day(Array): 최근 day_n일 동안의 전력 사용시간.day가 false일경우 빈 배열.
-                -   raspberry_id(String) : 라즈베리파이 아이디
-                -   usage_time(Double) : 사용 시간(단위: 시간. 소수점 아래 : 분)
-    -   error response body:
+- `GET /api/web/using-time` - 사용시간 조회 API
+
+  -   description : 라즈베리파이의 전력 사용시간을 조회합니다.
+  -   method: GET
+  -   URI: /api/web/using-time
+  -   request header: X
+  -   param:
+      -   raspberry_group(String) : 라즈베리파이가 속한 그룹 아이디
+      -   raspberry_id(String) : 라즈베리파이 식별 아이디, 빈 문자열일 경우 그룹 내 전체 라즈베리파이를 대상으로 조회
+      -   year(Boolean) : 최근 year_n년동안의 전력 사용시간 조회. False 시 조회하지 않음
+      -   year_n(Integer) : 최근 몇 년을 조회할 것인지 결정. year가 False일 경우 의미 없음.
+      -   month(Boolean) : 최근 month_n달동안의 전력 사용시간 조회. False 시 조회하지 않음.
+      -   month_n(Integer) : 최근 몇 달을 조회할 것인지 결정. month가 False일 경우 의미없음.
+      -   day(Boolean) : 최근 day_n일 동안의 전력 사용시간 조회. False 시 조회하지 않음.
+      -   day_n(Integer) : 최근 며칠을 조회할 것인지 결정. day가 False일 경우 의미없음.
+  -   request body: X
+  -   response header:
+      
+      -   `Content-Type` : `application/json`
+  - response body:
+    - usage_times:
+      -   year(Array): 최근 year_n년 동안의 전력 사용시간. year가 false일경우 빈 배열.[[
+          -   <년도>(String) : ex) '2015', '2016', '2017' 
+          -   usage_time(int) : 사용 시간(단위 : 초)
+          
+          ]]
+
+      -   month(Array): 최근 month_n달 동안의 전력 사용시간. month가 false일경우 빈 배열.[[
+          -   <월>(String) : ex) '2020-07',  '2020-08', '2020-09'
+          -   usage_time(int) : 사용 시간(단위: 초)
+          
+          ]]
+      -   day(Array): 최근 day_n일 동안의 전력 사용시간.day가 false일경우 빈 배열.[[
+          -   <일>(String) : ex) '2020-09-24', '2020-09-25', '2020-09-26'
+          -   usage_time(int) : 사용 시간(단위: 초)
+          
+          ]]
+  -   error response body:
 
 
 
