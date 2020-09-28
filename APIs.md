@@ -436,7 +436,7 @@
   
   - 401 (Unauthorized)
   - message : "접근 권한이 없습니다."
-      
+    
   
 
 
@@ -479,6 +479,44 @@
           
           ]]
   -   error response body:
+
+- `GET api/web/using-time/<String:year>` 
+
+  - description : 그 해의 사용 시간을 매 월별로 보여준다. 
+
+  - method : GET
+
+  - URI : `/api/web/using-time<String:year>`
+
+  - request header :
+
+  - param: 
+
+    - raspberry_group(String) : 라즈베리파이가 속한 그룹 아이디
+    - raspberry_id(String) : 라즈베리파이 식별 아이디, 빈 문자열일 경우 그룹 내 전체 라즈베리파이를 대상으로 조회
+
+  - request body: X
+
+  - response header: 
+
+  - response body: 
+
+    - 200:
+
+      - using_time : [{
+
+        - "2020-01" :  사용 시간(int)
+
+        }
+
+      ]
+
+- error response body:
+
+  - 404 (Not Found)
+
+
+
 
 
 
