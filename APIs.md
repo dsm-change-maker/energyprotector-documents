@@ -454,7 +454,7 @@
       -   raspberry_id(String) : 라즈베리파이 식별 아이디, 빈 문자열일 경우 그룹 내 전체 라즈베리파이를 대상으로 조회
       -   year(Boolean) : 최근 year_n년동안의 전력 사용시간 조회. False 시 조회하지 않음
       -   year_n(Integer) : 최근 몇 년을 조회할 것인지 결정. year가 False일 경우 의미 없음.
-      -   month(Boolean) : 최근 month_n달동안의 전력 사용시간 조회. False 시 조회하지 않음.
+      -   month(Boolean) g : 최근 month_n달동안의 전력 사용시간 조회. False 시 조회하지 않음.
       -   month_n(Integer) : 최근 몇 달을 조회할 것인지 결정. month가 False일 경우 의미없음.
       -   day(Boolean) : 최근 day_n일 동안의 전력 사용시간 조회. False 시 조회하지 않음.
       -   day_n(Integer) : 최근 며칠을 조회할 것인지 결정. day가 False일 경우 의미없음.
@@ -550,4 +550,36 @@
       ]
 
   - error response body:
+
+- `GET api/web/myranking`
+
+  - description : 내 순위 계산
+
+  - method : GET
+
+  - URI : `/api/web/myranking`
+
+  - request header : 
+
+    - `authorization`: `Bearer <token>`
+
+  - param: X
+
+  - request body: X
+
+  - response header:
+
+  - response body:
+
+    - 200:{
+
+      - "rank" : 3
+      - "total" : 100
+
+      }
+
+  - error response body:
+
+    - 404:
+      - {"message": "접근 권한이 없습니다."}
 
