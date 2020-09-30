@@ -245,24 +245,26 @@
 
 - `GET /api/raspberry` - 라즈베리파이 등록 정보 조회 API
 
-- description : 라즈베리파이 등록 정보를 가져옵니다.
+
+  - description : 라즈베리파이 등록 정보를 가져옵니다.
+    
   - method : GET
 
   - URI : /api/raspberry
 
-  -   request header : 
-      
-      -   `Content-Type`:`application/json`
-      -   `Authentication`:`Bearer <token>`
-      
+  - request header : 
+
+    -   `Content-Type`:`application/json`
+    -   `Authentication`:`Bearer <token>`
+
   - param : X
 
   - request body: 
 
-  -   response header :
-      
-      -   `Content-Type` : `application/json`
-      
+  - response header :
+
+    -   `Content-Type` : `application/json`
+
   - response body:
     - remote_control(Boolean) : 원격 제어 허용/비허용. 비허용 시 웹/앱 등에서 라즈베리파이에 연결 불가능. 만약 False 시 raspberry_devices는 빈 배열.
 
@@ -273,7 +275,7 @@
 
       ]
 
-  -   error response body:
+  - error response body:
 
   
 
@@ -511,12 +513,41 @@
 
       ]
 
-- error response body:
+  - error response body:
 
   - 404 (Not Found)
 
+  
 
+- `GET api/web/ranking`
 
+  - description : 모든 라즈베리파이의 이번 달 순위 10위 반환
 
+  - method : GET
 
+  - URI : `/api/web/ranking`
+
+  - request header :
+
+  - param: X
+
+  - request body: X
+
+  - response header:
+
+  - response body:
+
+    - 200:
+
+      - "ranking" : [{
+
+        - raspberry_id:
+        - raspberry_group:
+        - time : 
+
+        }
+
+      ]
+
+  - error response body:
 
